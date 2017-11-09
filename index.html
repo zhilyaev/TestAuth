@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Тестовое задание по oauth</title>
+	<meta name="author" content="Дмитрий Жиляев">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script
+			src="http://code.jquery.com/jquery-3.2.1.min.js"
+			integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			crossorigin="anonymous"></script>
+</head>
+<body>
+<br>
+	<section id="app" class="container">
+		<section class="jumbotron">
+			<h1>Тестовое задание - <small>Вебим.ру</small></h1>
+			<p class="lead">Сделать веб приложение, на выбранном вами языке, при открытии должно показать кнопку «авторизоваться» по нажатию делает oauth авторизацию ВКонтакте, и показывает имя авторизованного пользователя и 5 любых друзей пользователя. При последующих запусках/заходах на страницу сразу показывает всю информацию т.к. уже понимает, что авторизовано и авторизация запоминается. Бекенд если потребуется, на любой технологии на ваш выбор.
+				Результат предоставить в качестве url (или приложения, которое можно установить на мобильное устройство) где можно протестировать работу и в виде исходных кодов в tar.gz архиве на телеграм <a href="https://telegram.me/olegbo">https://telegram.me/olegbo</a> (вопросы сюда же) также указать ссылку на резюме и ожидания по ЗП.
+			</p>
+			<hr>
+			<div class="text-center">
+				<a role="button" href="https://oauth.vk.com/authorize?client_id=6251983&redirect_uri=http://phpStorm/TestAuth&scope=friends&response_type=token&v=5.52" class="btn col-sm-4 btn-outline-primary btn-lg" id="btn">Авторизоваться</a>
+			</div>
+			<p><small>Данное решение использует метод авторизации через <a href="https://vk.com/dev/implicit_flow_user">токен</a>;
+				не содержит Backend-решений, следовательно все манипуляции осуществляются c помощью клиентского JavaScript.
+				Для сохранения токена используеться <a href="https://developer.mozilla.org/ru/docs/Web/API/Window/localStorage">localStorage.</a>
+			</small>
+			</p>
+		</section>
+		<section class="container">
+			<h2 id="username" class="text-center" style="display: none"></h2>
+			<hr>
+			<div id="friends" class="form-row"></div>
+		</section>
+		<footer class="container">
+			<div class="row">
+				<div class="col-lg justify-content-lg-center">
+					<div class="align-content-lg-center" align="center">
+						<img src="data:image/svg+xml;base64,PCEtLT94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8tLT4KPHN2ZyB2aWV3Qm94PSIwIDAgMTcgMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgY2xhc3M9InNpLWdseXBoIHNpLWdseXBoLWNvZGUiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCAzLjAuMyAoNzg5MSkgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+ODE1PC90aXRsZT4KICAgIAogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC4wMDAwMDAsIDEuMDAwMDAwKSIgZmlsbD0iIzQzNDM0MyI+CiAgICAgICAgICAgIDxwYXRoIGQ9Ik0xMS43NCwxMC45OTMgQzExLjkxOCwxMC45OTMgMTIuMDk2LDEwLjkyOCAxMi4yMzMsMTAuNzk4IEwxNS43MTIsNy40ODIgQzE1Ljk4Myw3LjIyMSAxNS45ODMsNi44MDIgMTUuNzEyLDYuNTQzIEwxMi4yMzMsMy4yMjUgQzExLjk2MSwyLjk2NiAxMS41MjEsMi45NjYgMTEuMjQ5LDMuMjI1IEMxMC45NzgsMy40ODYgMTAuOTc4LDMuOTA2IDExLjI0OSw0LjE2MyBMMTQuMjM2LDcuMDEzIEwxMS4yNDksOS44NjEgQzEwLjk3OCwxMC4xMiAxMC45NzgsMTAuNTQxIDExLjI0OSwxMC43OTkgQzExLjM4NSwxMC45MjggMTEuNTYzLDEwLjk5MyAxMS43NCwxMC45OTMgTDExLjc0LDEwLjk5MyBaIiBjbGFzcz0ic2ktZ2x5cGgtZmlsbCI+PC9wYXRoPgogICAgICAgICAgICA8cGF0aCBkPSJNNC4zMDEsMTAuODgzIEM0LjEyMSwxMC44ODMgMy45NDIsMTAuODIxIDMuODA0LDEwLjY5MyBMMC4yODcsNy40MjUgQzAuMDEyLDcuMTcgMC4wMTIsNi43NTYgMC4yODcsNi41MDIgTDMuODA0LDMuMjM0IEM0LjA3OCwyLjk3OCA0LjUyNCwyLjk3OCA0Ljc5OSwzLjIzNCBDNS4wNzIsMy40OSA1LjA3MiwzLjkwMyA0Ljc5OSw0LjE1OCBMMS43NzksNi45NjMgTDQuNzk5LDkuNzY3IEM1LjA3MiwxMC4wMjMgNS4wNzIsMTAuNDM3IDQuNzk5LDEwLjY5MyBDNC42NjEsMTAuODIgNC40OCwxMC44ODMgNC4zMDEsMTAuODgzIEw0LjMwMSwxMC44ODMgWiIgY2xhc3M9InNpLWdseXBoLWZpbGwiPjwvcGF0aD4KICAgICAgICAgICAgPHBhdGggZD0iTTYuNjg1LDEzLjg4OSBDNi45MjgsMTMuODMyIDcuMTMxLDEzLjY0IDcuMTg4LDEzLjM3OSBMOS45MzQsMC44ODUgQzEwLjAxMiwwLjUzMSA5Ljc5MywwLjE4OCA5LjQ0NiwwLjExNyBDOS4wOTYsMC4wNDcgOC43NTMsMC4yNzcgOC42NzYsMC42MzEgTDUuOTMsMTMuMTI1IEM1Ljg1MiwxMy40NzcgNi4wNzIsMTMuODIgNi40MTgsMTMuODkxIEM2LjUxLDEzLjkwOSA2LjYwMSwxMy45MDcgNi42ODUsMTMuODg5IEw2LjY4NSwxMy44ODkgWiIgY2xhc3M9InNpLWdseXBoLWZpbGwiPjwvcGF0aD4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==" align="center" width="120">
+					</div>
+					<h5 align="center">© 2017. All rights reserved</h5>
+					<div class="align-content-lg-center" align="center">
+						<p class="lead">Жиляев Дмитрий | <a href="https://spb.hh.ru/resume/b07a57a1ff027be6670039ed1f33774a325159">Резюме</a></p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</section>
+<script>
+
+	
+    if(location.hash.indexOf("#access_token=")===0){
+        localStorage.token = location.hash.substring(14,99);
+        localStorage.session = Date.now() + 86400;
+        location.hash = "";
+    }
+
+    if(Date.now() <= parseInt(localStorage.session)){
+       $("#btn").hide();
+       send('friends.search',{count:5, fields:'photo_200'}, function (data) {
+            render(data.response);
+        });
+        send('users.get',{}, function (data) {
+            //render
+	        const btn = '<button type="button" onclick="localStorage.clear(); location.reload();" class="btn btn-dark">Выйти</button>';
+            $('#username').html('Привет, '+data.response[0].first_name+' '+data.response[0].last_name+'! '+ btn).show();
+        });
+    }
+
+    /**
+     * @return {string}
+     */
+    function URL  (method, params) {
+	    if (!method) throw new Error('Method not found');
+	    params = params || {};
+	    params['access_token'] = localStorage.token;
+		return "https://api.vk.com/method/" + method + '?' + $.param(params);
+    }
+
+	function send(method, params, callback) {
+		$.ajax({
+			url: URL(method, params),
+			method: "GET",
+			dataType: "JSONP",
+			success: callback
+		});
+    }
+
+    function render(response) {
+        let html = '';
+        for(let i=1; i<response.length;i++){
+            let f = response[i];
+            html += "<div class=\"card col-sm\">" +
+                "<img class=\"card-img-top\" src=\""+f.photo_200+"\">" +
+                "<div class=\"card-body\">" +
+                "<h5 class=\"card-text\">"+f.first_name+' '+f.last_name+"</h5>" +
+                "</div>" +
+                "</div>";
+        }
+        //console.log(html);
+        $("#friends").html(html);
+    }
+</script>
+</body>
+</html>
