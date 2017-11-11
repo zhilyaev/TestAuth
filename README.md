@@ -15,5 +15,7 @@
 1. Clone the repo
 2. Change URL in the #btn : [How build the URL?](https://vk.com/dev/first_guide?f=3.%20%D0%90%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F)
 ```html
-<a role="button" href="https://oauth.vk.com/authorize?client_id=ТВОЙ_ID_ПРИЛОЖЕНИЯ&redirect_uri=ТВОЯ_ССЫЛКА&scope=friends&response_type=token&v=5.52" class="btn col-sm-4 btn-outline-primary btn-lg" id="btn">Авторизоваться</a>
+<a role="button" href="https://oauth.vk.com/authorize?client_id=ТВОЙ_ID_ПРИЛОЖЕНИЯ&redirect_uri=ТВОЯ_ССЫЛКА&scope=friends&response_type=token&v=5.52" id="btn">
+  Авторизоваться
+</a>
 ```
